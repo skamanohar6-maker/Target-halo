@@ -43,7 +43,10 @@ export default function AddCompanySheet({ onClose }: Props) {
   const toggle = (k: keyof typeof form) => () =>
     setForm(f => ({ ...f, [k]: !f[k] }));
 
-  const inputCls = 'w-full px-3 py-2.5 text-sm border border-slate-200 rounded-lg focus:outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-50 transition-colors bg-white placeholder:text-slate-300';
+  const inputCls = 'w-full px-3 py-2.5 text-sm rounded-lg focus:outline-none transition-all placeholder:text-slate-300' +
+    ' focus:ring-2 focus:ring-indigo-100 focus:border-indigo-400' +
+    ' border border-white/70' +
+    ' [background:rgba(255,255,255,0.65)] [backdrop-filter:blur(8px)]';
   const selectCls = `${inputCls} appearance-none`;
   const labelCls = 'block text-xs font-semibold text-slate-500 mb-1.5';
   const reqStar = <span className="text-red-500 ml-0.5">*</span>;
@@ -71,9 +74,18 @@ export default function AddCompanySheet({ onClose }: Props) {
       <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[1px]" onClick={onClose} />
 
       {/* Sheet */}
-      <div className="fixed inset-y-0 right-0 z-50 w-[780px] bg-white shadow-2xl flex flex-col animate-slide-in">
+      <div
+        className="fixed inset-y-0 right-0 z-50 w-[780px] flex flex-col animate-slide-in"
+        style={{
+          background: 'rgba(248,250,255,0.92)',
+          backdropFilter: 'blur(32px) saturate(200%)',
+          WebkitBackdropFilter: 'blur(32px) saturate(200%)',
+          borderLeft: '1px solid rgba(255,255,255,0.7)',
+          boxShadow: '-8px 0 48px rgba(15,23,42,0.14), -2px 0 12px rgba(41,47,128,0.06)',
+        }}
+      >
         {/* Header */}
-        <div className="flex items-center justify-between px-7 py-5 border-b border-slate-100 shrink-0">
+        <div className="flex items-center justify-between px-7 py-5 shrink-0" style={{ borderBottom: '1px solid rgba(255,255,255,0.6)', background: 'rgba(255,255,255,0.5)' }}>
           <div>
             <h2 className="text-lg font-display font-bold text-slate-900">Add Counter Party</h2>
             <p className="text-xs text-slate-400 mt-0.5">Create a new company in the portfolio</p>

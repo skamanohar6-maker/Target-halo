@@ -239,7 +239,7 @@ export default function PortfolioPage() {
   });
 
   return (
-    <div className="flex-1 min-h-0 overflow-y-auto" style={{ background: '#F7F9FC' }}>
+    <div className="flex-1 min-h-0 overflow-y-auto" style={{ background: 'linear-gradient(160deg, #EDF0FF 0%, #F4F6FF 35%, #F7F9FC 65%, #EFF4FF 100%)' }}>
 
       {/* Hero Header */}
       <div
@@ -305,11 +305,7 @@ export default function PortfolioPage() {
 
           {/* Stats strip */}
           <div
-            className="mt-6 grid grid-cols-4 rounded-xl overflow-hidden fade-up-2"
-            style={{
-              background: 'rgba(255,255,255,0.04)',
-              border: '1px solid rgba(255,255,255,0.08)',
-            }}
+            className="mt-6 grid grid-cols-4 rounded-xl overflow-hidden fade-up-2 glass-dark"
           >
             {STATS.map(({ label, value, sub, icon: Icon, positive }, i) => (
               <div
@@ -373,14 +369,14 @@ export default function PortfolioPage() {
             </p>
           </div>
           <div className="flex items-center gap-2.5">
-            <div className="relative">
+            <div className="relative glass-input rounded-lg">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
               <input
                 type="text"
                 placeholder="Search companies..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-56 pl-9 pr-4 h-9 text-sm border border-slate-200 rounded-lg bg-white text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-400 transition-all"
+                className="w-56 pl-9 pr-4 h-9 text-sm rounded-lg bg-transparent text-slate-800 placeholder:text-slate-400 focus:outline-none transition-all"
               />
             </div>
 
@@ -391,9 +387,14 @@ export default function PortfolioPage() {
                 onClick={openFilter}
                 className={`flex items-center gap-2 h-9 pl-3.5 pr-2.5 text-sm font-medium rounded-lg border transition-all ${
                   categoryFilter !== 'All'
-                    ? 'bg-indigo-50 border-indigo-200 text-indigo-700'
-                    : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
+                    ? 'border-indigo-300 text-indigo-700'
+                    : 'text-slate-600 hover:border-white/80'
                 }`}
+                style={
+                  categoryFilter !== 'All'
+                    ? { background: 'rgba(238,242,255,0.85)', backdropFilter: 'blur(12px)' }
+                    : { background: 'rgba(255,255,255,0.60)', backdropFilter: 'blur(12px)', borderColor: 'rgba(255,255,255,0.70)' }
+                }
               >
                 <SlidersHorizontal className="w-3.5 h-3.5 shrink-0" />
                 <span className="max-w-[180px] truncate">
@@ -415,17 +416,21 @@ export default function PortfolioPage() {
               {/* Dropdown portal — renders on document.body to escape all transforms */}
               {filterOpen && createPortal(
                 <div
-                  className="w-80 bg-white rounded-xl border border-slate-200 overflow-hidden"
+                  className="w-80 rounded-xl overflow-hidden"
                   style={{
                     position: 'fixed',
                     top: dropdownPos.top,
                     right: dropdownPos.right,
                     zIndex: 99999,
-                    boxShadow: '0 12px 40px rgba(15,23,42,0.14), 0 4px 12px rgba(15,23,42,0.08)',
+                    background: 'rgba(255,255,255,0.82)',
+                    backdropFilter: 'blur(24px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+                    border: '1px solid rgba(255,255,255,0.85)',
+                    boxShadow: '0 16px 48px rgba(15,23,42,0.14), 0 4px 16px rgba(41,47,128,0.08), inset 0 1px 0 rgba(255,255,255,1)',
                   }}
                 >
-                  <div className="px-4 py-3 border-b border-slate-100">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Filter by Category</p>
+                  <div className="px-4 py-3" style={{ borderBottom: '1px solid rgba(59,69,160,0.08)' }}>
+                    <p className="text-xs font-semibold text-indigo-600 uppercase tracking-wider">Filter by Category</p>
                   </div>
                   <div className="max-h-[360px] overflow-y-auto py-1">
                     {FILTER_CATEGORIES.map((cat) => {
@@ -470,21 +475,26 @@ export default function PortfolioPage() {
               style={{ animationDelay: `${0.05 * idx}s` }}
             >
               <div
-                className="bg-white rounded-xl overflow-hidden text-left transition-all duration-200"
+                className="rounded-xl overflow-hidden text-left transition-all duration-200"
                 style={{
-                  border: '1px solid rgba(226,232,240,0.8)',
-                  boxShadow: '0 1px 3px rgba(15,23,42,0.04), 0 1px 2px rgba(15,23,42,0.04)',
+                  background: 'rgba(255,255,255,0.68)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: '1px solid rgba(255,255,255,0.75)',
+                  boxShadow: '0 2px 12px rgba(15,23,42,0.06), inset 0 1px 0 rgba(255,255,255,0.95)',
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget as HTMLDivElement;
-                  el.style.boxShadow = '0 8px 24px rgba(41,47,128,0.12), 0 2px 8px rgba(20,35,75,0.06)';
-                  el.style.borderColor = 'rgba(173,175,216,0.5)';
-                  el.style.transform = 'translateY(-1px)';
+                  el.style.background = 'rgba(255,255,255,0.85)';
+                  el.style.boxShadow = '0 10px 32px rgba(41,47,128,0.12), 0 2px 8px rgba(20,35,75,0.06), inset 0 1px 0 rgba(255,255,255,1)';
+                  el.style.borderColor = 'rgba(255,255,255,0.92)';
+                  el.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLDivElement;
-                  el.style.boxShadow = '0 1px 3px rgba(15,23,42,0.04), 0 1px 2px rgba(15,23,42,0.04)';
-                  el.style.borderColor = 'rgba(226,232,240,0.8)';
+                  el.style.background = 'rgba(255,255,255,0.68)';
+                  el.style.boxShadow = '0 2px 12px rgba(15,23,42,0.06), inset 0 1px 0 rgba(255,255,255,0.95)';
+                  el.style.borderColor = 'rgba(255,255,255,0.75)';
                   el.style.transform = 'translateY(0)';
                 }}
               >
@@ -543,7 +553,11 @@ export default function PortfolioPage() {
                       <div
                         key={label}
                         className="rounded-lg p-2.5"
-                        style={{ background: '#F8FAFB', border: '1px solid rgba(226,232,240,0.6)' }}
+                        style={{
+                          background: 'rgba(255,255,255,0.55)',
+                          backdropFilter: 'blur(8px)',
+                          border: '1px solid rgba(255,255,255,0.70)',
+                        }}
                       >
                         <p className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-1">{label}</p>
                         <p className="fin-mono text-[13px] font-semibold text-slate-800">{value}</p>
@@ -554,7 +568,7 @@ export default function PortfolioPage() {
                   {/* Footer: SPOCs + sparkline + trend */}
                   <div
                     className="flex items-center justify-between pt-3"
-                    style={{ borderTop: '1px solid rgba(241,245,249,1)' }}
+                    style={{ borderTop: '1px solid rgba(255,255,255,0.5)' }}
                   >
                     <div className="flex items-center gap-1.5 text-xs text-slate-400">
                       <Users className="w-3.5 h-3.5" />

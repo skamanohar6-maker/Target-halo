@@ -72,7 +72,7 @@ export default function DashboardPage() {
   const aumMin = Math.min(...AUM_TREND.map(d => d.value)) - 200;
 
   return (
-    <div className="flex-1 min-h-0 overflow-y-auto" style={{ background: '#F7F9FC' }}>
+    <div className="flex-1 min-h-0 overflow-y-auto" style={{ background: 'linear-gradient(160deg, #EDF0FF 0%, #F4F6FF 35%, #F7F9FC 65%, #EFF4FF 100%)' }}>
       {/* Hero Header */}
       <div
         className="fade-up-1"

@@ -74,24 +74,38 @@
 }
 
 @layer components {
-  /* Glass morphism card */
+  /* Glass morphism card — light background */
   .glass-card {
-    background: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 4px 16px rgba(15,23,42,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 4px 20px rgba(15,23,42,0.07), inset 0 1px 0 rgba(255,255,255,0.9);
   }
 
-  /* Premium card */
+  /* Glass on dark backgrounds (hero headers, etc.) */
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 16px rgba(0,0,0,0.15);
+  }
+
+  /* Premium card — glassmorphism */
   .halo-card {
-    @apply bg-white rounded-xl border border-slate-200/80;
-    box-shadow: var(--shadow-card);
-    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    @apply rounded-xl;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    box-shadow: 0 2px 12px rgba(15,23,42,0.06), 0 1px 3px rgba(15,23,42,0.04), inset 0 1px 0 rgba(255,255,255,0.95);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
   }
   .halo-card:hover {
-    box-shadow: var(--shadow-hover);
-    @apply border-indigo-200/60;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 8px 28px rgba(41,47,128,0.10), 0 2px 8px rgba(20,35,75,0.06), inset 0 1px 0 rgba(255,255,255,1);
+    border-color: rgba(255,255,255,0.9);
   }
 
   /* Financial data — monospace */
@@ -144,6 +158,27 @@
   .stat-divider {
     @apply flex items-center divide-x divide-slate-200;
   }
+
+  /* Glass input / search bar */
+  .glass-input {
+    background: rgba(255, 255, 255, 0.60);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.70);
+    box-shadow: inset 0 1px 2px rgba(15,23,42,0.04), 0 1px 4px rgba(15,23,42,0.04);
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .glass-input:focus-within {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(59,69,160,0.4);
+    box-shadow: 0 0 0 3px rgba(59,69,160,0.10), 0 1px 4px rgba(15,23,42,0.06);
+    outline: none;
+  }
+
+  /* Sheet slide-in */
+  .animate-slide-in {
+    animation: slide-in-sheet 0.28s cubic-bezier(0.22,1,0.36,1) both;
+  }
 }
 
 @layer utilities {
@@ -188,5 +223,10 @@
 
 @keyframes slide-in-right {
   from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-in-sheet {
+  from { opacity: 0; transform: translateX(32px); }
   to   { opacity: 1; transform: translateX(0); }
 }
