@@ -11,7 +11,7 @@ export default defineConfig({
     dedupe: ['react', 'react-dom', 'react-router-dom'],
   },
   server: {
-    port: 5174,
+    port: parseInt(process.env.PORT || '5174'),
     host: true,
   },
 })
